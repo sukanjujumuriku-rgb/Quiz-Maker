@@ -54,6 +54,8 @@ function addQuestion(){
     document.getElementById("choice2").value = "";
     document.getElementById("choice3").value = "";
     document.getElementById("choice4").value = "";
+
+    updateQuestionList();
 }
 
 function saveQuizBook(){
@@ -71,4 +73,36 @@ function saveQuizBook(){
     );
 
     alert("問題集を保存しました！");
+}
+
+function updateQuestionList(){
+
+    const list =
+        document.getElementById(
+            "questionList"
+        );
+
+    list.innerHTML = "";
+
+    quizBook.questions.forEach(
+        (q,index)=>{
+
+        list.innerHTML += `
+            <details class="quiz-card">
+
+                <summary>
+                    問題 ${index+1}
+                </summary>
+
+                <p>${q.question}</p>
+
+                <ul>
+                    ${q.choices.map(
+                        c => `<li>${c}</li>`
+                    ).join("")}
+                </ul>
+
+            </details>
+        `;
+    });
 }
