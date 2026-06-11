@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズ作成 - School Quiz Maker</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>➕ クイズ作成</h1>
+
+        <input
+            type="text"
+            id="question"
+            placeholder="問題を入力">
+
+        <input
+            type="text"
+            id="choice1"
+            placeholder="選択肢1">
+
+        <input
+            type="text"
+            id="choice2"
+            placeholder="選択肢2">
+
+        <input
+            type="text"
+            id="choice3"
+            placeholder="選択肢3">
+
+        <input
+            type="text"
+            id="choice4"
+            placeholder="選択肢4">
+
+        <select id="answer">
+            <option value="1">選択肢1が正解</option>
+            <option value="2">選択肢2が正解</option>
+            <option value="3">選択肢3が正解</option>
+            <option value="4">選択肢4が正解</option>
+        </select>
+
+        <button onclick="saveQuiz()">
+            保存
+        </button>
+
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+        function saveQuiz() {
+
+            const quiz = {
+                question: document.getElementById("question").value,
+                choices: [
+                    document.getElementById("choice1").value,
+                    document.getElementById("choice2").value,
+                    document.getElementById("choice3").value,
+                    document.getElementById("choice4").value
+                ],
+                answer: document.getElementById("answer").value
+            };
+
+            localStorage.setItem(
+                "latestQuiz",
+                JSON.stringify(quiz)
+            );
+
+            document.getElementById("result").textContent =
+                "保存しました！";
+        }
+    </script>
+
+</body>
+</html>
