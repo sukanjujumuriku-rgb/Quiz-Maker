@@ -63,3 +63,10 @@ button{
 button{
     cursor:pointer;
 }
+h1{
+    font-size:3rem;
+}
+
+input::placeholder{
+    font-size:18px;
+}
