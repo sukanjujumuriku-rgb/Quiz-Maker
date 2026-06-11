@@ -74,35 +74,39 @@ function saveQuizBook(){
 
     alert("問題集を保存しました！");
 }
-
 function updateQuestionList(){
 
     const list =
-        document.getElementById(
-            "questionList"
-        );
+        document.getElementById("questionList");
 
     list.innerHTML = "";
 
-    quizBook.questions.forEach(
-        (q,index)=>{
+    quizBook.questions.forEach((q,index)=>{
 
         list.innerHTML += `
-            <details class="quiz-card">
+        <details class="quiz-card">
 
-                <summary>
-                    問題 ${index+1}
-                </summary>
+            <summary>
+                問題 ${index + 1}
+            </summary>
 
-                <p>${q.question}</p>
+            <p>${q.question}</p>
 
-                <ul>
-                    ${q.choices.map(
-                        c => `<li>${c}</li>`
-                    ).join("")}
-                </ul>
+            <ul>
+                ${q.choices.map(
+                    c => `<li>${c}</li>`
+                ).join("")}
+            </ul>
 
-            </details>
+            <button onclick="editQuestion(${index})">
+                ✏️ 編集
+            </button>
+
+            <button onclick="deleteQuestion(${index})">
+                🗑️ 削除
+            </button>
+
+        </details>
         `;
     });
 }
