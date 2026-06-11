@@ -2,6 +2,7 @@ let quizBook = {
     title: "",
     questions: []
 };
+
 let editingIndex = -1;
 
 function createQuizBook(){
@@ -9,7 +10,7 @@ function createQuizBook(){
     const title =
         document.getElementById("quizTitle").value;
 
-    if(!title){
+    if(!title.trim()){
         alert("タイトルを入力してください");
         return;
     }
@@ -35,31 +36,41 @@ function addQuestion(){
         document.getElementById("choice4").value
     ];
 
+    if (!question.trim()) {
+        alert("問題を入力してください");
+        return;
+    }
+
+    if (choices.some(c => !c.trim())) {
+        alert("選択肢をすべて入力してください");
+        return;
+    }
+
     const answer =
         Number(
             document.getElementById("answer").value
         );
 
     const newQuestion = {
-    question,
-    choices,
-    answer
-};
+        question,
+        choices,
+        answer
+    };
 
-if(editingIndex === -1){
+    if(editingIndex === -1){
 
-    quizBook.questions.push(
-        newQuestion
-    );
+        quizBook.questions.push(
+            newQuestion
+        );
 
-}else{
+    }else{
 
-    quizBook.questions[
-        editingIndex
-    ] = newQuestion;
+        quizBook.questions[
+            editingIndex
+        ] = newQuestion;
 
-    editingIndex = -1;
-}
+        editingIndex = -1;
+    }
 
     document.getElementById("count")
         .textContent =
@@ -76,6 +87,11 @@ if(editingIndex === -1){
 
 function saveQuizBook(){
 
+    if (quizBook.questions.length === 0) {
+        alert("問題を1問以上追加してください");
+        return;
+    }
+
     const quizzes =
         JSON.parse(
             localStorage.getItem("quizzes")
@@ -89,7 +105,10 @@ function saveQuizBook(){
     );
 
     alert("問題集を保存しました！");
+
+    location.href = "my-quizzes.html";
 }
+
 function updateQuestionList(){
 
     const list =
@@ -126,6 +145,7 @@ function updateQuestionList(){
         `;
     });
 }
+
 function deleteQuestion(index){
 
     if(!confirm("削除しますか？")){
