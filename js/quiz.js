@@ -9,6 +9,15 @@ const selectedIndex =
 const quizBook =
     quizzes[selectedIndex];
 
+if (!quizBook) {
+
+    alert("問題集が見つかりません");
+
+    location.href = "play.html";
+
+    throw new Error("quiz not found");
+}
+
 document.getElementById("quizTitle")
     .textContent = quizBook.title;
 
