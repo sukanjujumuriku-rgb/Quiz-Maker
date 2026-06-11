@@ -92,28 +92,43 @@ function addQuestion(){
     updateQuestionList();
 }
 
-function saveQuizBook(){
+async function saveQuizBook(){
 
     if (quizBook.questions.length === 0) {
         alert("問題を1問以上追加してください");
         return;
     }
 
-    const quizzes =
-        JSON.parse(
-            localStorage.getItem("quizzes")
-        ) || [];
+    const user = auth.currentUser;
 
-    quizzes.push(quizBook);
+    if (!user) {
+        alert("ログインしてください");
+        return;
+    }
 
-    localStorage.setItem(
-        "quizzes",
-        JSON.stringify(quizzes)
-    );
+    try {
 
-    alert("問題集を保存しました！");
+        await addDoc(
+            collection(
+                db,
+                "users",
+                user.uid,
+                "quizzes"
+            ),
+            quizBook
+        );
 
-    location.href = "my-quizzes.html";
+        alert("問題集を保存しました！");
+
+        location.href =
+            "my-quizzes.html";
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert("保存に失敗しました");
+    }
 }
 
 function updateQuestionList(){
