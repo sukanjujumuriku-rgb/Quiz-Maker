@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>問題集作成</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📚 問題集作成</h1>
+
+    <input
+        type="text"
+        id="quizTitle"
+        placeholder="問題集タイトル">
+
+    <button onclick="createQuizBook()">
+        問題集を作成
+    </button>
+
+    <div id="editor" style="display:none;">
+
+        <h2 id="bookName"></h2>
+
+        <input
+            type="text"
+            id="question"
+            placeholder="問題">
+
+        <input
+            type="text"
+            id="choice1"
+            placeholder="選択肢1">
+
+        <input
+            type="text"
+            id="choice2"
+            placeholder="選択肢2">
+
+        <input
+            type="text"
+            id="choice3"
+            placeholder="選択肢3">
+
+        <input
+            type="text"
+            id="choice4"
+            placeholder="選択肢4">
+
+        <select id="answer">
+            <option value="0">選択肢1</option>
+            <option value="1">選択肢2</option>
+            <option value="2">選択肢3</option>
+            <option value="3">選択肢4</option>
+        </select>
+
+        <button onclick="addQuestion()">
+            ＋ 問題を追加
+        </button>
+
+        <p id="count">
+            問題数: 0
+        </p>
+
+        <button onclick="saveQuizBook()">
+            💾 問題集を保存
+        </button>
+
+    </div>
+
+</div>
+
+<script src="../js/create.js"></script>
+
+</body>
+</html>
