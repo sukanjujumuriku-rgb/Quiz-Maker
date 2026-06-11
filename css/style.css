@@ -96,3 +96,59 @@ button{
 
     box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
+.big-score{
+
+    font-size:6rem;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    margin:40px 0;
+}
+
+.boom{
+
+    animation:boom .5s;
+}
+
+@keyframes boom{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.5);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+.confetti{
+
+    position:fixed;
+
+    top:-20px;
+
+    width:12px;
+    height:12px;
+
+    background:red;
+
+    animation:
+        fall 3s linear forwards;
+}
+
+@keyframes fall{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(110vh);
+    }
+}
