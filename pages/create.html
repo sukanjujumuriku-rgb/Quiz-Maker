@@ -3,19 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>クイズ作成 - School Quiz Maker</title>
+    <title>問題集作成</title>
+
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>➕ クイズ作成</h1>
+    <h1>📚 問題集作成</h1>
+
+    <input
+        type="text"
+        id="quizTitle"
+        placeholder="問題集タイトル">
+
+    <button onclick="createQuizBook()">
+        問題集を作成
+    </button>
+
+    <div id="editor" style="display:none;">
+
+        <h2 id="bookName"></h2>
 
         <input
             type="text"
             id="question"
-            placeholder="問題を入力">
+            placeholder="問題">
 
         <input
             type="text"
@@ -38,43 +52,29 @@
             placeholder="選択肢4">
 
         <select id="answer">
-            <option value="1">選択肢1が正解</option>
-            <option value="2">選択肢2が正解</option>
-            <option value="3">選択肢3が正解</option>
-            <option value="4">選択肢4が正解</option>
+            <option value="0">選択肢1</option>
+            <option value="1">選択肢2</option>
+            <option value="2">選択肢3</option>
+            <option value="3">選択肢4</option>
         </select>
 
-        <button onclick="saveQuiz()">
-            保存
+        <button onclick="addQuestion()">
+            ＋ 問題を追加
         </button>
 
-        <p id="result"></p>
+        <p id="count">
+            問題数: 0
+        </p>
+
+        <button onclick="saveQuizBook()">
+            💾 問題集を保存
+        </button>
 
     </div>
 
-    <script>
-        function saveQuiz() {
+</div>
 
-            const quiz = {
-                question: document.getElementById("question").value,
-                choices: [
-                    document.getElementById("choice1").value,
-                    document.getElementById("choice2").value,
-                    document.getElementById("choice3").value,
-                    document.getElementById("choice4").value
-                ],
-                answer: document.getElementById("answer").value
-            };
-
-            localStorage.setItem(
-                "latestQuiz",
-                JSON.stringify(quiz)
-            );
-
-            document.getElementById("result").textContent =
-                "保存しました！";
-        }
-    </script>
+<script src="../js/create.js"></script>
 
 </body>
 </html>
