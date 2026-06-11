@@ -2,6 +2,7 @@ let quizBook = {
     title: "",
     questions: []
 };
+let editingIndex = -1;
 
 function createQuizBook(){
 
@@ -39,11 +40,26 @@ function addQuestion(){
             document.getElementById("answer").value
         );
 
-    quizBook.questions.push({
-        question,
-        choices,
-        answer
-    });
+    const newQuestion = {
+    question,
+    choices,
+    answer
+};
+
+if(editingIndex === -1){
+
+    quizBook.questions.push(
+        newQuestion
+    );
+
+}else{
+
+    quizBook.questions[
+        editingIndex
+    ] = newQuestion;
+
+    editingIndex = -1;
+}
 
     document.getElementById("count")
         .textContent =
@@ -108,5 +124,50 @@ function updateQuestionList(){
 
         </details>
         `;
+    });
+}
+function deleteQuestion(index){
+
+    if(!confirm("削除しますか？")){
+        return;
+    }
+
+    quizBook.questions.splice(index,1);
+
+    document.getElementById("count")
+        .textContent =
+        `問題数: ${quizBook.questions.length}`;
+
+    updateQuestionList();
+}
+
+function editQuestion(index){
+
+    const q =
+        quizBook.questions[index];
+
+    document.getElementById("question")
+        .value = q.question;
+
+    document.getElementById("choice1")
+        .value = q.choices[0];
+
+    document.getElementById("choice2")
+        .value = q.choices[1];
+
+    document.getElementById("choice3")
+        .value = q.choices[2];
+
+    document.getElementById("choice4")
+        .value = q.choices[3];
+
+    document.getElementById("answer")
+        .value = q.answer;
+
+    editingIndex = index;
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
     });
 }
