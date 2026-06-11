@@ -1,33 +1,35 @@
 import { auth } from "./firebase.js";
 
 import {
-    GoogleAuthProvider,
-    signInWithPopup
+  GoogleAuthProvider,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-const loginBtn =
-    document.getElementById("googleLogin");
+const loginButton =
+  document.getElementById("googleLogin");
 
-loginBtn.addEventListener("click", async () => {
+loginButton.addEventListener("click", async () => {
 
-    const provider =
-        new GoogleAuthProvider();
+  const provider =
+    new GoogleAuthProvider();
 
-    try {
+  try {
 
-        const result =
-            await signInWithPopup(auth, provider);
+    await signInWithPopup(
+      auth,
+      provider
+    );
 
-        alert(
-            `${result.user.displayName} さん、ようこそ！`
-        );
+    alert("ログイン成功");
 
-        location.href = "../index.html";
+    window.location.href =
+      "../index.html";
 
-    } catch(error) {
+  } catch(error) {
 
-        console.error(error);
+    console.error(error);
 
-        alert("ログインに失敗しました");
-    }
+    alert("ログイン失敗");
+  }
+
 });
